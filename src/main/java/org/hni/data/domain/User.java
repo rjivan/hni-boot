@@ -1,66 +1,43 @@
 package org.hni.data.domain;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- * Created by rjivan on 11/10/16.
- */
+import lombok.Getter;
+import lombok.ToString;
+
 @Entity
+@Getter
+@ToString
 public class User {
-    public enum Gender {M,F}
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private String mobilePhone;
+    private String email;
+    private boolean deleted;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar created;
 
-
-
-    protected User() {}
+    protected User() {
+    }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
+    public enum Gender {M, F}
 }
