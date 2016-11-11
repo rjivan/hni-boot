@@ -1,0 +1,117 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+#              - column:
+#                  name: mobile_phone
+#                  type: varchar(45)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: email
+#                  type: varchar(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: deleted
+#                  type: int
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: hashed_secret
+#                  type: varchar(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: salt
+#                  type: varchar(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: created
+#                  type: datetime
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: opt_out
+#                  type: int
+#                  defaultValueNumeric: 0
+#                  remarks: true/false whether the user is opt-in/out
+#                  constraints:
+#                    nullable: false
+  - changeSet:
+      id: 2
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: organization
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: website
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: logo
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_organization_user
+                    references: user(id)
+
+
+
+
