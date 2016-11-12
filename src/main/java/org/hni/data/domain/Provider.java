@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +35,7 @@ public class Provider {
     private Date created;
     private Long createdBy;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "provider_addresses", joinColumns = {@JoinColumn(name = "provider_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
+    @JoinTable(name = "provider_address", joinColumns = {@JoinColumn(name = "provider_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
     private Set<Address> addresses = new HashSet<>();
 
     protected Provider() {

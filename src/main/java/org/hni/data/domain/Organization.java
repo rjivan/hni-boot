@@ -32,7 +32,7 @@ public class Organization {
     @Column(name = "id")
     protected Long id;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "organization_addresses", joinColumns = {@JoinColumn(name = "organization_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
+    @JoinTable(name = "organization_address", joinColumns = {@JoinColumn(name = "organization_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
     protected Set<Address> addresses = new HashSet<>();
     private String name;
     private String phone;

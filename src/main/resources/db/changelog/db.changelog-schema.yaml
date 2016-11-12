@@ -1,0 +1,576 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: mobile_phone
+                  type: varchar(45)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hashed_secret
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: salt
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: opt_out
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street1
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street2
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: city
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: state
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: zip
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lattitude
+                  type: decimal(9,6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: longitude
+                  type: decimal(9,6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timezone
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: organization
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: website
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: logo
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_organization_user
+                    references: user(id)
+        - createTable:
+            tableName: organization_address
+            columns:
+              - column:
+                  name: organization_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_organization_address_organization
+                    references: organization(id)
+              - column:
+                  name: address_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_organization_address_address
+                    references: address(id)
+  - changeSet:
+      id: 4
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: security_role
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user_organization_role
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_organization_role_user
+                    references: user(id)
+              - column:
+                  name: organization_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_organization_role_organization
+                    references: organization(id)
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_organization_role_security_role
+                    references: security_role(id)
+  - changeSet:
+      id: 5
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: provider
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_user
+                    references: user(id)
+        - createTable:
+            tableName: provider_address
+            columns:
+              - column:
+                  name: provider_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_address_provider
+                    references: provider(id)
+              - column:
+                  name: address_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_address_address
+                    references: address(id)
+        - createTable:
+            tableName: provider_location
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: provider_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_location_provider
+                    references: provider(id)
+              - column:
+                  name: created
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_location_user
+                    references: user(id)
+        - createTable:
+            tableName: provider_location_hours
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: provider_location_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_location_hours_provider_location
+                    references: provider_location(id)
+              - column:
+                  name: dow
+                  type: varchar(3)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: open_hour
+                  type: int
+                  remarks: open hour in 24hr
+                  constraints:
+                    nullable: true
+              - column:
+                  name: close_hour
+                  type: int
+                  remarks: close hour in 24hr
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: provider_location_address
+            columns:
+              - column:
+                  name: provider_location_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_location_address_provider_location
+                    references: provider_location(id)
+              - column:
+                  name: address_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_provider_location_hours_address
+                    references: address(id)
+  - changeSet:
+      id: 6
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: menu
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: provider_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_menu_provider
+                    references: provider(id)
+              - column:
+                  name: start_hour
+                  type: int
+                  remarks: starting hour when menu is available in 24hr
+                  constraints:
+                    nullable: true
+              - column:
+                  name: end_hour
+                  type: int
+                  remarks: end hour when menu is available in 24hr
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: menu_item
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: menu_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_menu_item_menu
+                    references: menu(id)
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: price
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expires
+                  type: datetime
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 7
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: user_order
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_user
+                    references: user(id)
+              - column:
+                  name: provider_location_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_provider_location
+                    references: provider_location(id)
+              - column:
+                  name: order_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ready_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pickup_date
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: subtotal
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_created_user
+                    references: user(id)
+        - createTable:
+            tableName: order_item
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: menu_item_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_item_menu_item
+                    references: menu_item(id)
+              - column:
+                  name: order_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_item_order
+                    references: user_order(id)
+  - changeSet:
+      id: 8
+      author: rjivan
+      changes:
+        - createTable:
+            tableName: security_permission
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: domain
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: security_role_permission
+            columns:
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_security_role_permission_role
+                    references: security_role(id)
+              - column:
+                  name: security_permission_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_security_role_permission_security_permission
+                    references: security_permission(id)
+              - column:
+                  name: all_instances
+                  type: int
+                  defaultValue: 0
+                  constraints:
+                    nullable: true

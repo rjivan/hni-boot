@@ -22,11 +22,11 @@ public class HniAdminApplication {
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
             // save a couple of users
-            repository.save(new User("John", "Doe"));
-            repository.save(new User("Billy", "Bob"));
-            repository.save(new User("Jeff", "Park"));
-            repository.save(new User("John", "Wanye"));
-            repository.save(new User("Jane", "Doe"));
+//            repository.save(new User("John", "Doe"));
+//            repository.save(new User("Billy", "Bob"));
+//            repository.save(new User("Jeff", "Park"));
+//            repository.save(new User("John", "Wanye"));
+//            repository.save(new User("Jane", "Doe"));
         };
     }
 

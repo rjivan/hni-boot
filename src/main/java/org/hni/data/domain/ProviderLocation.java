@@ -36,7 +36,7 @@ public class ProviderLocation {
     private Date created;
     private Long createdBy;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "provider_location_addresses", joinColumns = {@JoinColumn(name = "provider_location_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
+    @JoinTable(name = "provider_location_address", joinColumns = {@JoinColumn(name = "provider_location_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "address_id", referencedColumnName = "id")})
     private Set<Address> addresses = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "provider_id", referencedColumnName = "id")
