@@ -1,6 +1,5 @@
 package org.hni;
 
-import org.hni.data.domain.User;
 import org.hni.data.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

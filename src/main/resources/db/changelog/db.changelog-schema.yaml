@@ -316,7 +316,7 @@ databaseChangeLog:
                     foreignKeyName: fk_provider_location_user
                     references: user(id)
         - createTable:
-            tableName: provider_location_hours
+            tableName: provider_location_hour
             columns:
               - column:
                   name: id

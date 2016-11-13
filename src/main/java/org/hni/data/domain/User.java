@@ -27,9 +27,12 @@ public class User {
     private Gender gender;
     private String mobilePhone;
     private String email;
+    private String hashedSecret;
+    private String salt;
     private boolean deleted;
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar created;
+
 
     protected User() {
     }

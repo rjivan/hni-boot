@@ -44,4 +44,6 @@ public class ProviderLocation {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "providerLocation", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private Set<ProviderLocationHour> providerLocationHours = new HashSet<>();
 
+    protected ProviderLocation() {}
+
 }
