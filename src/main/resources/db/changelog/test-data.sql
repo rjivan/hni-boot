@@ -1,4 +1,4 @@
-insert into user values(1,'Super','User','M','mphone', 'superuser@hni.com', 0, 'password1', '42M7kr4oektqA6Jgy9u1YQ==', now(), '0');
+insert into user values(1,'Super','User','M','mphone', 'superuser@hni.com', 0, 'password', '42M7kr4oektqA6Jgy9u1YQ==', now(), '0');
 insert into user values(2,'Freddy','Fikes','M','479-555-1212', '', 0, '', '', now(), '0');
 insert into user values(3,'Mikey','Multiphone','M','479-555-4321', '', 0, '', '', now(), '0');
 insert into user values(4,'Mikey','Multiphone','M','479-555-5678', '', 0, '', '', now(), '0');
